@@ -1,0 +1,10 @@
+{% extends "base.html"%}
+{% load static %}
+{% block content %}
+  {% include "header.html" with subtitle="Todas las tareas" %}
+  {% for task in tasks %}
+    <h3>{{ task }}</h3>
+  {% empty %}
+    <p>Nada que hacer. ¡Enhorabuena!</p>
+  {% endfor %}
+{% endblock %}
