@@ -1,10 +1,45 @@
-{% extends "base.html"%}
+{% extends "base.html" %}
 {% load static %}
+
 {% block content %}
+
   {% include "header.html" with subtitle="Todas las tareas" %}
-  {% for task in tasks %}
-    <h3>{{ task }}</h3>
-  {% empty %}
-    <p>Nada que hacer. ¡Enhorabuena!</p>
-  {% endfor %}
+
+  {% if tasks %}
+    <table border="1" cellpadding="8">
+      <tbody>
+        {% for task in tasks %}
+          <tr>
+            <td>{{ task.name }}</td>
+            <td>
+              {% if task.completed %}
+                ✅
+              {% else %}
+                ❌
+              {% endif %}
+            </td>
+            <td>
+              <a href="{% url 'tasks:toogle-task' task.slug %}">Cambiar Estado</a>
+            </td>
+            <td>
+              <a href="{% url 'tasks:edit-task' task.slug %}">Editar</a>
+            </td>
+            <td>
+              <a href="{% url 'tasks:delete-task' task.slug %}">Borrar</a>
+            </td>
+          </tr>
+        {% empty %}
+        <p>Nada que hacer. ¡Enhorabuena!</p>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+  <br>
+  <div>
+    <a href="{% url 'tasks:task-list' %}">Ver todas</a> |
+    <a href="{% url 'tasks:task-list-completed' %}">Completadas</a> |
+    <a href="{% url 'tasks:task-list-pending' %}">Pendientes</a> |
+    <a href="{% url 'tasks:add-task' %}">Añadir nueva tarea</a>
+  </div>
+
 {% endblock %}
