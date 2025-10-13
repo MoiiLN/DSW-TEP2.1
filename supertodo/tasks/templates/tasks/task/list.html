@@ -5,9 +5,7 @@
 
   {% include "header.html" with subtitle="Todas las tareas" %}
 
-  {% if tasks %}
     <table border="1" cellpadding="8">
-      <tbody>
         {% for task in tasks %}
           <tr>
             <td>{{ task.name }}</td>
@@ -31,9 +29,7 @@
         {% empty %}
         <p>Nada que hacer. ¡Enhorabuena!</p>
         {% endfor %}
-      </tbody>
     </table>
-  {% endif %}
   <br>
   <div>
     <a href="{% url 'tasks:task-list' %}">Ver todas</a> |
