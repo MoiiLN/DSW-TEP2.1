@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'static/css/base.css' %}">
+{% block content %}
+  {% include "header.html" with subtitle="Añadir tarea" %}
+  <form method="post" novalidate>
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Crear">
+  </form>
+  <a href="{% url 'tasks:task-list' %}">Cancelar</a>
+{% endblock %}

@@ -1,5 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
+from django.utils.text import slugify
 
+from .forms import AddTaskForm, EditTaskForm
 from .models import Task
 
 
@@ -9,31 +11,49 @@ def task_list(request):
 
 
 def task_list_completed(request):
-    tasks = Task.objects.get(task_list_completed=True)
-    return render(request, 'tasks/task/list.html'), {'tasks': tasks}
+    tasks = Task.objects.filter(completed=True)
+    return render(request, 'tasks/task/completed.html', {'tasks': tasks})
 
 
 def task_list_pending(request):
-    tasks = Task.objects.filter(task_list_completed=False)
-    return render(request, 'tasks/task/list.html'), {'tasks': tasks}
+    tasks = Task.objects.filter(completed=False)
+    return render(request, 'tasks/task/pending.html', {'tasks': tasks})
 
 
-def task_detail(request, slug):
-    tasks = Task.objects.filter(slug=slug)
-    return render(request, 'tasks/task/detail.html', {'tasks': tasks})
+def task_detail(request, task_slug):
+    task = Task.objects.get(slug=task_slug)
+    return render(request, 'tasks/task/detail.html', {'task': task})
 
 
 def add_task(request):
-    pass
+    if request.method == 'POST':
+        if (form := AddTaskForm(request.POST)).is_valid():
+            task = form.save(commit=False)
+            task.slug = slugify(task.name)
+            task.save()
+            return redirect('tasks:task-list')
+    else:
+        form = AddTaskForm()
+    return render(request, 'tasks/task/add.html', dict(form=form))
 
 
 def delete_task(request):
-    pass
+    return redirect('tasks:task-list')
 
 
-def edit_task(request):
-    pass
+def edit_task(request, task_slug):
+    task = Task.objects.get(slug=task_slug)
+    if request.method == 'POST':
+        if (form := EditTaskForm(request.POST, instance=task)).is_valid():
+            task = form.save(commit=False)
+            task.slug = slugify(task.name)
+            task.save()
+            return redirect('tasks:task-list')
+    else:
+        form = EditTaskForm(instance=task)
+    return render(request, 'tasks/task/edit.html', dict(task=task, form=form))
 
 
 def toogle_task(request):
-    pass
+    Task.completed = not Task.completed
+    Task.completed.save()

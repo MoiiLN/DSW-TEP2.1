@@ -6,8 +6,8 @@ class Task(models.Model):
     description = models.TextField(blank=True)
     slug = models.SlugField(unique=True)
     completed = models.BooleanField(default=False)
-    created_at = models.DateField(auto_now_add=True)
-    updated_at = models.DateField(auto_now=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
         return f'Nombre: {self.name} {self.completed}'

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+  {% include "header.html" %}
+  <table border="1" cellpadding="8">
+    <tr>
+      <td>{{ task.name }}</td>
+      <td>
+          {% if task.completed %}
+            Completada
+          {% else %}
+           Pendiente
+          {% endif %}
+      </td>
+      <td>{{ task.description }}</td>
+    </tr>  
+  </table>
+  <a href="{% url 'tasks:task-list' %}">Volver</a> 
+{% endblock %}
+
+  

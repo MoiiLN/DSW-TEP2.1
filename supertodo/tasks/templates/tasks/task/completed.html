@@ -3,21 +3,14 @@
 
 {% block content %}
 
-  {% include "header.html" with subtitle="Todas las tareas" %}
+  {% include "header.html" with subtitle="Tareas completadas" %}
 
     <table border="1" cellpadding="8">
         {% for task in tasks %}
           <tr>
             <td>{{ task.name }}</td>
             <td>
-              {% if task.completed %}
-                ✅
-              {% else %}
-                ❌
-              {% endif %}
-            </td>
-            <td>
-              <a href="{% url 'tasks:task-detail' task.slug %}">Detalles</a>
+              ✅
             </td>
             <td>
               <a href="{% url 'tasks:toogle-task' task.slug %}">Cambiar Estado</a>
