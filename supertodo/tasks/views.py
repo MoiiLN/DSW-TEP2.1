@@ -37,7 +37,9 @@ def add_task(request):
     return render(request, 'tasks/task/add.html', dict(form=form))
 
 
-def delete_task(request):
+def delete_task(task_slug):
+    task = Task.objects.get(slug=task_slug)
+    task.delete()
     return redirect('tasks:task-list')
 
 
@@ -55,5 +57,4 @@ def edit_task(request, task_slug):
 
 
 def toogle_task(request):
-    Task.completed = not Task.completed
-    Task.completed.save()
+    pass
