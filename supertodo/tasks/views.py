@@ -37,7 +37,7 @@ def add_task(request):
     return render(request, 'tasks/task/add.html', dict(form=form))
 
 
-def delete_task(task_slug):
+def delete_task(request, task_slug):
     task = Task.objects.get(slug=task_slug)
     task.delete()
     return redirect('tasks:task-list')
@@ -50,11 +50,14 @@ def edit_task(request, task_slug):
             task = form.save(commit=False)
             task.slug = slugify(task.name)
             task.save()
-            return redirect('tasks:task-list')
+            return redirect(f'/tasks/{task.slug}/') # Se deberá indicar la ruta absoluta.
     else:
         form = EditTaskForm(instance=task)
     return render(request, 'tasks/task/edit.html', dict(task=task, form=form))
 
 
-def toogle_task(request):
-    pass
+def toogle_task(request, task_slug):
+    task = Task.objects.get(slug=task_slug)
+    task.completed = not task.completed
+    task.save()
+    return redirect('tasks:task-list')
