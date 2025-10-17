@@ -3,15 +3,21 @@
 <link rel="stylesheet" href="{% static 'static/css/base.css' %}">
 {% block content %}
   {% include "header.html" with subtitle="Añadir tarea" %}
-  <div class="form">
-  <form method="post" novalidate>
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Crear">
-  </form>
-  </div>
-  <br><br>
   <div class="links">
-  <a href="{% url 'tasks:task-list' %}">Cancelar</a>
+      <a href="{% url 'tasks:task-list' %}"><button>Ver todas</button></a> 
+      <a href="{% url 'tasks:task-list-completed' %}"><button>Completadas</button></a> 
+      <a href="{% url 'tasks:task-list-pending' %}"><button>Pendientes</button></a> 
+      <a href="{% url 'tasks:add-task' %}"><button>Añadir una nueva tarea</button></a>
+  </div><br>
+  <div class="form">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      {{ form }}
+      <input type="submit" value="Crear" class="crear">
+      <a href="{% url 'tasks:task-list' %}"><button>Cancelar</button></a>
+    </form>
+  </div><br>
+  <div class="links">
+    <a href="{% url 'tasks:task-list' %}"><button>Volver</button></a>
   </div>
 {% endblock %}

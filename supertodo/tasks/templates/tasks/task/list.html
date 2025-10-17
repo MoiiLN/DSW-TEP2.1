@@ -18,22 +18,22 @@
             <td><a href="{% url 'tasks:task-detail' task.slug %}">{{ task.name }}</a></td>
             <td>
               {% if task.completed %}
-                ✅
+                <a href="{% url 'tasks:toogle-task' task.slug %}"><button>✅</button></a>
               {% else %}
-                ❌
+                <a href="{% url 'tasks:toogle-task' task.slug %}"><button>❌</button></a>
               {% endif %}
             </td>
             <td>
-              <a href="{% url 'tasks:task-detail' task.slug %}">Detalles</a>
+              <a href="{% url 'tasks:task-detail' task.slug %}"><button>Detalles</button></a>
             </td>
             <td>
-              <a href="{% url 'tasks:toogle-task' task.slug %}">🔄</a>
+              <a href="{% url 'tasks:toogle-task' task.slug %}"><button>🔄</button></a>
             </td>
             <td>
-              <a href="{% url 'tasks:edit-task' task.slug %}">Editar</a>
+              <a href="{% url 'tasks:edit-task' task.slug %}"><button>Editar</button></a>
             </td>
             <td>
-              <a href="{% url 'tasks:delete-task' task.slug %}">Borrar</a>
+              <a href="{% url 'tasks:delete-task' task.slug %}"><button>Borrar</button></a>
             </td>
           </tr>
         {% empty %}

@@ -3,10 +3,15 @@
 <link rel="stylesheet" href="{% static 'static/css/base.css' %}">
 {% block content %}
   {% include "header.html" with subtitle="Editar tarea" %}
+  <div class="form">
   <form method="post">
     {% csrf_token %}
     {{ form }}
-    <input type="submit" value="Guardar">
+    <input type="submit" value="Guardar" class="crear">
+    <a href="{% url 'tasks:task-list' %}"><button>Cancelar</button></a>
   </form>
-  <a href="{% url 'tasks:task-list' %}">Cancelar</a>
+  </div><br>
+  <div class="links">
+    <a href="{% url 'tasks:task-list' %}"><button>Volver</button></a>
+  </div>
 {% endblock %}

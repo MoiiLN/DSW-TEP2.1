@@ -4,23 +4,26 @@
 {% block content %}
 
   {% include "header.html" %}
-  <div class="main-items">
-  <table class="tabla" cellpadding="8">
-    <tr>
-      <td>{{ task.name }}</td>
-      <td>
-          {% if task.completed %}
-            Completada
-          {% else %}
-           Pendiente
-          {% endif %}
-      </td>
-      <td>{{ task.description }}</td>
-    </tr>  
-  </table>
+  <div class="links">
+      <a href="{% url 'tasks:task-list' %}"><button>Ver todas</button></a> 
+      <a href="{% url 'tasks:task-list-completed' %}"><button>Completadas</button></a> 
+      <a href="{% url 'tasks:task-list-pending' %}"><button>Pendientes</button></a> 
+      <a href="{% url 'tasks:add-task' %}"><button>Añadir una nueva tarea</button></a>
+  </div><br>
+  <div class="detail">
+    <h3>{{ task.name }}</h3><br>
+    {% if task.completed %}
+      <p>Completada</p><br>
+    {% else %}
+      <p>Pendiente</p><br>
+    {% endif %}
+    <p>{{ task.description }}</p>
+    <a href="{% url 'tasks:toogle-task' task.slug %}"><button>🔄</button></a>
+    <a href="{% url 'tasks:edit-task' task.slug %}"><button>Editar</button></a>
+    <a href="{% url 'tasks:delete-task' task.slug %}"><button>Borrar</button></a>
   </div>
   <br><br>
   <div class="links">
-    <a href="{% url 'tasks:task-list' %}">Volver</a>
+    <a href="{% url 'tasks:task-list' %}"><button>Volver</button></a>
   </div>
 {% endblock %} 
