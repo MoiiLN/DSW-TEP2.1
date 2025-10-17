@@ -1,11 +1,11 @@
 {% extends "base.html" %}
 {% load static %}
-
+<link rel="stylesheet" href="{% static 'static/css/base.css' %}">
 {% block content %}
 
   {% include "header.html" with subtitle="Tareas completadas" %}
-
-    <table border="1" cellpadding="8">
+  <div class="main-items">
+    <table class="tabla" cellpadding="8">
         {% for task in tasks %}
           <tr>
             <td>{{ task.name }}</td>
@@ -26,8 +26,10 @@
         <p>Nada que hacer. ¡Enhorabuena!</p>
         {% endfor %}
     </table>
+  </div>
+    <br>
   <br>
-  <div>
+  <div class="links">
     <a href="{% url 'tasks:task-list' %}">Ver todas</a> |
     <a href="{% url 'tasks:task-list-completed' %}">Completadas</a> |
     <a href="{% url 'tasks:task-list-pending' %}">Pendientes</a> |

@@ -1,4 +1,31 @@
 h1,
 h2 {
   text-align: center;
+  color: white;
+}
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #013b37;
+  color: white;
+}
+.main-items {
+  display: flex;
+  justify-content: center;
+}
+.tabla {
+  background-color: #000000;
+  border: 0cm;
+  border-radius: 20px;
+}
+
+.links,
+a {
+  text-align: center;
+  color: white;
+}
+
+.form {
+  display: flex;
+  justify-content: center;
+  background-color: #000000;
 }
