@@ -14,7 +14,7 @@ body {
 }
 .tabla {
   background-color: #000000;
-  border: 0cm;
+  border: 0px;
   border-radius: 20px;
 }
 
@@ -28,4 +28,9 @@ a {
   display: flex;
   justify-content: center;
   background-color: #000000;
+}
+button {
+  background-color: white;
+  border-radius: 10px;
+  border: 0px;
 }

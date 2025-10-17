@@ -4,11 +4,18 @@
 {% block content %}
 
   {% include "header.html" with subtitle="Todas las tareas" %}
+  <div class="links">
+      <a href="{% url 'tasks:task-list' %}"><button>Ver todas</button></a> 
+      <a href="{% url 'tasks:task-list-completed' %}"><button>Completadas</button></a> 
+      <a href="{% url 'tasks:task-list-pending' %}"><button>Pendientes</button></a> 
+      <a href="{% url 'tasks:add-task' %}"><button>Añadir una nueva tarea</button></a>
+  </div>
+  <br>
   <div class="main-items">
     <table class="tabla" cellpadding="8">
         {% for task in tasks %}
           <tr>
-            <td>{{ task.name }}</td>
+            <td><a href="{% url 'tasks:task-detail' task.slug %}">{{ task.name }}</a></td>
             <td>
               {% if task.completed %}
                 ✅
@@ -33,13 +40,5 @@
         <p>Nada que hacer. ¡Enhorabuena!</p>
         {% endfor %}
     </table>
-  </div>
-  <br>
-  <br>
-  <div class="links">
-      <a href="{% url 'tasks:task-list' %}">Ver todas</a> 
-      <a href="{% url 'tasks:task-list-completed' %}">Completadas</a> 
-      <a href="{% url 'tasks:task-list-pending' %}">Pendientes</a> 
-      <a href="{% url 'tasks:add-task' %}">Añadir nueva tarea</a>
   </div>
 {% endblock %}
